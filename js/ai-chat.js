@@ -6,7 +6,7 @@
   'use strict';
 
   const CONFIG = {
-    API_KEY: 'sk-96Piy0hdIBYpymXSaIZA3z4OdCHQEw4g3fFZCbSqOKavJ0OT',
+    API_KEY: 'sk-96Piy0hdIBYpymXSaIZA3z4OdCHQEw4g3fFZCbSqOKavJ0OL',
     API_URL: 'https://api.moonshot.cn/v1/chat/completions',
     MODEL: 'moonshot-v1-8k',
     STREAMING: true,
