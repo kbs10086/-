@@ -1,0 +1,461 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* 背景图片 + 渐变后备 */
+      background-size: cover, auto;
+      background-position: center center, 0 0;
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed;
+      font-family: 'KaiTi', '楷体', '华文楷书', 'Microsoft YaHei', serif;
+      color: #1e293b;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    
+
+    /* ========= 导航栏 - 独立全宽行 ========= */
+    .navbar {
+       width: 100%;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       flex-wrap: wrap;
+       padding: 0.8rem 2.5rem;   /* 按需调整上下内边距 */
+       background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      gap: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-img {
+      width: 35px;
+      height: 45px;
+      border-radius: 4px;
+      object-fit: cover;
+      background: #e2e8f0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="%23cbd5e1"><rect width="40" height="40" fill="%23e2e8f0" rx="8"/><text x="50%" y="50%" font-size="12" font-family="KaiTi,楷体" fill="%2364748b" text-anchor="middle" dy=".3em">Logo</text></svg>');
+      background-size: cover;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+    }
+
+    .nav-left-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-left-links a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #334155;
+      transition: all 0.25s ease;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-left-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3b82f6;
+      transition: width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border-radius: 2px;
+    }
+
+    .nav-left-links a:hover {
+      color: #2563eb;
+    }
+
+    .nav-left-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right .login-btn {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(105deg, #2563eb, #1e40af);
+      color: white;
+      padding: 0.6rem 1.8rem;
+      border-radius: 48px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    .nav-right .login-btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(105deg, #3b82f6, #2563eb);
+      box-shadow: 0 12px 22px -8px rgba(37, 99, 235, 0.5);
+    }
+
+    .nav-right .login-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* ========= 主容器：内容区域，垂直居中 ========= */
+    .container {
+      max-width: 1280px;
+      width: 90%;
+      margin: auto auto;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(115deg, #0f172a 0%, #1e40af 80%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: #334155;
+      margin-bottom: 2rem;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: linear-gradient(105deg, #2563eb, #1d4ed8);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -8px rgba(37, 99, 235, 0.4);
+      font-family: inherit;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(105deg, #3b82f6, #2563eb);
+      box-shadow: 0 16px 28px -12px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    /* ========= 登录弹窗 Modal ========= */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.2s;
+    }
+
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* 弹窗容器：宽度为屏幕宽度的三分之一左右，最大宽度500px，最小320px */
+    .login-modal {
+      width: 40%;
+      min-width: 320px;
+      max-width: 500px;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-overlay.active .login-modal {
+      transform: scale(1);
+    }
+
+    /* 左右分栏布局 (flex) */
+    .modal-inner {
+      display: flex;
+      flex-direction: row;
+      min-height: 280px;
+    }
+
+    /* 左侧：品牌区 */
+    .modal-left {
+      flex: 1;
+      background: linear-gradient(145deg, #f0f4ff, #e9effa);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+   
+    .modal-brand-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      top:50px;
+      position:relative;
+    }
+
+    /* 右侧：表单区 */
+    .modal-right {
+      flex: 1;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .input-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .input-row input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+
+    .input-row input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+    }
+
+    .captcha-btn {
+      background: #eff6ff;
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2563eb;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .captcha-btn:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .captcha-btn:active {
+      transform: scale(0.97);
+    }
+
+    .submit-login-btn {
+      background: linear-gradient(105deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .submit-login-btn:hover {
+      background: linear-gradient(105deg, #3b82f6, #2563eb);
+      transform: translateY(-2px);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.1);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #475569;
+      transition: 0.2s;
+    }
+
+    .close-modal:hover {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* 响应式：当屏幕宽度小于700px时，弹窗宽度调整为80% */
+    @media (max-width: 700px) {
+      .login-modal {
+        width: 80%;
+        min-width: auto;
+      }
+      .modal-inner {
+        flex-direction: column;
+      }
+      .modal-left {
+        padding: 1.5rem;
+      }
+      .modal-right {
+        padding: 1.5rem;
+      }
+    }
+
+    /* 原有响应式补充 */
+    @media (max-width: 880px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 1.5rem;
+      }
+      .nav-left {
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .nav-left-links {
+        gap: 1.5rem;
+      }
+      .nav-right {
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .hero {
+        padding: 2.5rem 1.5rem;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .hero-description {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-left-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .btn-primary {
+        padding: 0.7rem 1.6rem;
+        font-size: 1rem;
+      }
+      .logo-text {
+        font-size: 1.5rem;
+      }
+      .nav-left-links a {
+        font-size: 1rem;
+      }
+    }

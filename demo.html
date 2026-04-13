@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AI咨询 | 智能财务解决方案</title>
+  <style>
+      body{   background-image: url('./image/bg.png'), linear-gradient(145deg, #f8faff 0%, #f0f4fe 100%);}
+       .modal-logo-img {
+      width: 10px;
+      height: 15px;
+      border-radius: 0px;
+      margin-bottom: 0.8rem;
+      background: #e2e8f0;
+      background-size: cover;
+      position:relative;
+      bottom:50px;
+      right:40px;
+    }
+
+    </style>
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- Kimi AI 对话组件样式 -->
+  <link rel="stylesheet" href="./css/ai-chat.css">
+  <!-- 经营数据收集表单样式 -->
+  <link rel="stylesheet" href="./css/business-form.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-area">
+        <img class="logo-img" src="./image/logo.png" alt="品牌Logo预留区" title="预留Logo图片位置">
+        <span class="logo-text">智店参谋</span>
+      </div>
+      <ul class="nav-left-links">
+        <li><a href="#">社区</a></li>
+        <li><a href="#">知识库</a></li>
+        <li><a href="#">商城</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="login-btn" id="loginBtn">登录</div>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">AI咨询的时代已经到来</h1>
+        <p class="hero-description">
+          全天段智能咨询，辅助财务分析，提供专属解决方案
+        </p>
+        <button class="btn-primary" id="startBtn">✨ 一键开启AI咨询</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 登录弹窗 Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="login-modal">
+      <div class="close-modal" id="closeModalBtn">✕</div>
+      <div class="modal-inner">
+        <!-- 左侧：Logo + 智店参谋 -->
+        <div class="modal-left">
+          <div class="modal-logo-img">
+            <img src="./image/logo2.png" alt="品牌Logo预留区" title="预留Logo图片位置">
+          </div>
+          <div class="modal-brand-text">智店参谋</div>
+        </div>
+        <!-- 右侧：登录表单 -->
+        <div class="modal-right">
+          <div class="input-group">
+            <label>手机号</label>
+            <div class="input-row">
+              <span class="country-code">+86</span>
+              <input type="tel" id="phoneInput" placeholder="请输入手机号" maxlength="11">
+            </div>
+          </div>
+          <div class="input-group">
+            <label>验证码</label>
+            <div class="input-row">
+              <input type="text" id="smsCode" placeholder="请输入验证码">
+              <button class="captcha-btn" id="getCodeBtn">获取验证码</button>
+            </div>
+          </div>
+          <button class="submit-login-btn" id="submitLoginBtn">登录 / 注册</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // DOM 元素
+      const loginBtn = document.getElementById('loginBtn');
+      const modal = document.getElementById('loginModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const getCodeBtn = document.getElementById('getCodeBtn');
+      const submitLoginBtn = document.getElementById('submitLoginBtn');
+      const phoneInput = document.getElementById('phoneInput');
+      const smsCodeInput = document.getElementById('smsCode');
+
+      // 打开弹窗
+      function openModal() {
+        modal.classList.add('active');
+      }
+
+      // 关闭弹窗
+      function closeModal() {
+        modal.classList.remove('active');
+        // 可选重置表单
+        if (phoneInput) phoneInput.value = '';
+        if (smsCodeInput) smsCodeInput.value = '';
+      }
+
+      // 获取验证码模拟 (60秒倒计时简易)
+      let countdown = 0;
+      let timer = null;
+      function startCountdown(btn) {
+        if (countdown > 0) return;
+        countdown = 60;
+        btn.disabled = true;
+        btn.textContent = `${countdown}秒后重试`;
+        timer = setInterval(() => {
+          countdown--;
+          if (countdown <= 0) {
+            clearInterval(timer);
+            btn.disabled = false;
+            btn.textContent = '获取验证码';
+            countdown = 0;
+          } else {
+            btn.textContent = `${countdown}秒后重试`;
+          }
+        }, 1000);
+      }
+
+      // 模拟发送验证码
+      getCodeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const phone = phoneInput.value.trim();
+        if (!phone) {
+          alert('请先输入手机号');
+          return;
+        }
+        if (!/^1[3-9]\d{9}$/.test(phone)) {
+          alert('请输入正确的11位手机号');
+          return;
+        }
+        // 模拟发送验证码
+        alert(`验证码已发送至 ${phone}（演示：验证码为 123456）`);
+        startCountdown(getCodeBtn);
+        // 可自动填充演示验证码方便测试
+        if (smsCodeInput) smsCodeInput.value = '123456';
+      });
+
+      // 登录提交模拟
+      submitLoginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const phone = phoneInput.value.trim();
+        const code = smsCodeInput.value.trim();
+        if (!phone) {
+          alert('请输入手机号');
+          return;
+        }
+        if (!/^1[3-9]\d{9}$/.test(phone)) {
+          alert('手机号格式不正确');
+          return;
+        }
+        if (!code) {
+          alert('请输入验证码');
+          return;
+        }
+        // 模拟校验（演示环境验证码为123456即通过）
+        if (code === '123456') {
+          alert(`登录成功！欢迎 ${phone}`);
+          closeModal();
+        } else {
+          alert('验证码错误，请重试 (演示正确验证码为123456)');
+        }
+      });
+
+      // 打开登录弹窗
+      loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+
+      // 关闭弹窗（点击X）
+      closeModalBtn.addEventListener('click', closeModal);
+      // 点击遮罩层关闭
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // "一键开启AI咨询" - 先打开经营数据表单
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', function() {
+          if (window.BusinessForm) {
+            BusinessForm.open();
+          } else if (window.AIChat) {
+            AIChat.open();
+          } else {
+            alert('AI组件加载中，请稍后再试');
+          }
+        });
+      }
+
+      // 导航栏其他链接演示提示（社区、知识库、商城）
+      const otherLinks = document.querySelectorAll('.nav-left-links a');
+      otherLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const text = link.innerText.trim();
+          alert(`“${text}” 模块正在建设中，即将开放。`);
+        });
+      });
+    })();
+  </script>
+  <!-- AI 对话组件 -->
+  <script src="./js/ai-chat.js"></script>
+  <!-- 经营数据表单 -->
+  <script src="./js/business-form.js"></script>
+</body>
+</html>
